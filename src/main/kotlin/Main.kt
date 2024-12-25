@@ -2,16 +2,26 @@ fun main() {
     println("Введите строку:")
     val input = readLine() ?: ""
 
-    val counts = IntArray(256)
+    val sortedChars = input.toCharArray().sorted()
 
-    for (char in input) {
-        counts[char.code]++
-    }
+    var currentChar: Char? = null
+    var count = 0
 
     println("Результат:")
-    for (i in counts.indices) {
-        if (counts[i] > 0) {
-            println("${i.toChar()} - ${counts[i]}")
+    for (char in sortedChars) {
+        if (char == currentChar) {
+            count++
+        } else {
+            if (currentChar != null) {
+                println("$currentChar - $count")
+            }
+            currentChar = char
+            count = 1
         }
     }
+
+    if (currentChar != null) {
+        println("$currentChar - $count")
+    }
 }
+
